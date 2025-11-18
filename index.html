@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnonMind - Share Freely, Feel Light</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Light Mode */
+        :root {
+            --background: #FBF8F3;
+            --foreground: #3D3D52;
+            --card: #FFFFFF;
+            --card-foreground: #3D3D52;
+            --primary: #B8A1D9;
+            --secondary: #A8C9E8;
+            --muted: #E8E1F5;
+            --muted-foreground: #8D8D9E;
+            --accent: #D4C6E8;
+            --border: rgba(184, 161, 217, 0.2);
+            --input-background: #FFFFFF;
+        }
+
+        /* Dark Mode Variables */
+        .dark {
+            --background: #2A2A3E;
+            --foreground: #F5F5F7;
+            --card: #363650;
+            --card-foreground: #F5F5F7;
+            --primary: #B8A1D9;
+            --secondary: #6A8CAA;
+            --muted: #4A4A5E;
+            --muted-foreground: #B5B5C3;
+            --accent: #7E6FA3;
+            --border: rgba(184, 161, 217, 0.15);
+            --input-background: #4A4A5E;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dark nav {
+            background-color: rgba(54, 54, 80, 0.8);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--foreground);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background: none;
+            border: none;
+            color: var(--muted-foreground);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            color: var(--foreground);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn.active {
+            background-color: rgba(184, 161, 217, 0.2);
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            margin-left: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--foreground);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 64px;
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        .home-page {
+            min-height: calc(100vh - 64px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .hero {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .hero-quote {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            color: var(--muted-foreground);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--foreground);
+            opacity: 0.8;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .pill {
+            padding: 0.5rem 1.25rem;
+            background-color: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .dark .pill {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Feed Page */
+        .feed-page {
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 64px);
+        }
+
+        .feed-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feed-description {
+            color: var(--muted-foreground);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .thought-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .thought-card {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .thought-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .thought-text {
+            color: var(--foreground);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .thought-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .anonymous-label {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .like-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted-foreground);
+            transition: all 0.2s;
+            padding: 0.25rem;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.05);
+            color: var(--primary);
+        }
+
+        .like-btn.liked {
+            color: var(--primary);
+        }
+
+        .heart-icon {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .like-btn.liked .heart-icon {
+            fill: currentColor;
+        }
+
+        /* Share Page */
+        .share-page {
+            min-height: calc(100vh - 64px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .share-container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .share-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .share-description {
+            color: var(--muted-foreground);
+        }
+
+        .share-form {
+            margin-bottom: 2rem;
+        }
+
+        .form-card {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .thought-textarea {
+            width: 100%;
+            height: 200px;
+            background-color: var(--input-background);
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            transition: all 0.2s;
+        }
+
+        .thought-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(184, 161, 217, 0.1);
+        }
+
+        .thought-textarea::placeholder {
+            color: var(--muted-foreground);
+        }
+
+        .textarea-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .submit-btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .encouragement {
+            text-align: center;
+            color: var(--muted-foreground);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+
+        /* Profile Page */
+        .profile-page {
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 64px);
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, rgba(184, 161, 217, 0.2), rgba(168, 201, 232, 0.2), rgba(212, 198, 232, 0.2));
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .profile-info {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .profile-avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .profile-details {
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .profile-details {
+                text-align: left;
+            }
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-subtitle {
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .profile-stats {
+                justify-content: flex-start;
+            }
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .stat-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+        }
+
+        .profile-bio {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .bio-text {
+            color: var(--foreground);
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .profile-posts-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--foreground);
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .dark .empty-icon {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .empty-title {
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-description {
+            color: var(--muted-foreground);
+        }
+
+        .post-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-date {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .privacy-note {
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .dark .privacy-note {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .privacy-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(184, 161, 217, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .privacy-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-content p {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+        }
+
+        /* About Page */
+        .about-page {
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 64px);
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-description {
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .mission-card {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .mission-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-text {
+            color: var(--foreground);
+            opacity: 0.9;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-section {
+            margin-bottom: 3rem;
+        }
+
+        .features-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-text h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text p {
+            color: var(--muted-foreground);
+            font-size: 0.95rem;
+        }
+
+        .values-card {
+            background: linear-gradient(135deg, rgba(184, 161, 217, 0.1), rgba(168, 201, 232, 0.1));
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .values-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .value-item {
+            padding: 1rem;
+        }
+
+        .value-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-description {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .closing-message {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--muted-foreground);
+            font-style: italic;
+            font-size: 1.125rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--muted-foreground);
+            margin: 0.25rem 0;
+        }
+
+        /* Icons */
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .nav-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <button class="logo" onclick="navigateTo('home')">
+                <div class="logo-icon">A</div>
+                <span>AnonMind</span>
+            </button>
+            <div class="nav-items">
+                <button class="nav-btn" data-page="home" onclick="navigateTo('home')">Home</button>
+                <button class="nav-btn" data-page="feed" onclick="navigateTo('feed')">Feed</button>
+                <button class="nav-btn" data-page="share" onclick="navigateTo('share')">Share</button>
+                <button class="nav-btn" data-page="profile" onclick="navigateTo('profile')">Profile</button>
+                <button class="nav-btn" data-page="about" onclick="navigateTo('about')">About</button>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <svg class="icon sun-icon" style="display: none;" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon moon-icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="home-page">
+                <div class="hero">
+                    <div class="hero-icon">
+                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white;">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h1>Share Freely, Feel Light</h1>
+                    <p class="hero-quote">"A place to be you, without your name."</p>
+                    <p class="hero-description">
+                        Express yourself freely in a safe, anonymous space. 
+                        Share your thoughts, feelings, and experiences without judgment.
+                    </p>
+                    <button class="cta-btn" onclick="navigateTo('share')">Share Your Thought</button>
+                    <div class="feature-pills">
+                        <div class="pill">✨ Anonymous</div>
+                        <div class="pill">🔒 Safe Space</div>
+                        <div class="pill">💭 No Judgment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Page -->
+        <div id="feed" class="page">
+            <div class="feed-page">
+                <div class="container">
+                    <div class="feed-header">
+                        <h1>Community Thoughts</h1>
+                        <p class="feed-description">
+                            Read what others are sharing. You're not alone in your journey.
+                        </p>
+                    </div>
+                    <div class="thought-grid" id="feedGrid">
+                        <!-- Thought cards will be inserted here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Page -->
+        <div id="share" class="page">
+            <div class="share-page">
+                <div class="share-container">
+                    <div class="share-header">
+                        <h1>Share Your Thoughts</h1>
+                        <p class="share-description">
+                            Express yourself freely. Your identity remains completely anonymous.
+                        </p>
+                    </div>
+                    <form class="share-form" onsubmit="handleSubmit(event)">
+                        <div class="form-card">
+                            <label class="form-label" for="thoughtInput">What's on your mind?</label>
+                            <textarea 
+                                id="thoughtInput" 
+                                class="thought-textarea"
+                                placeholder="Share your thoughts, feelings, or experiences..."
+                                maxlength="500"
+                            ></textarea>
+                            <div class="textarea-info">
+                                <span id="charCount">0/500 characters</span>
+                                <span>Posted anonymously</span>
+                            </div>
+                        </div>
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 20px; height: 20px;">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                                <span id="submitText">Share Thought</span>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="encouragement">
+                        "Every thought shared is a step towards healing."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile" class="page">
+            <div class="profile-page">
+                <div class="container">
+                    <div class="profile-header">
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 48px; height: 48px;">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div class="profile-details">
+                                <h2 class="profile-name" id="profileName">Anonymous User</h2>
+                                <p class="profile-subtitle">Anonymous Mind Sharer</p>
+                                <div class="profile-stats">
+                                    <div class="stat-item">
+                                        <svg class="stat-icon" viewBox="0 0 24 24">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                        <span id="postCount">0 Posts</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <svg class="stat-icon" viewBox="0 0 24 24">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                        <span id="likeCount">0 Likes</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <svg class="stat-icon" viewBox="0 0 24 24">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+                                            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+                                            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                        <span>Since November 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-bio">
+                            <svg class="stat-icon" viewBox="0 0 24 24" style="margin-top: 4px;">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <p class="bio-text">
+                                "Sharing thoughts freely, one post at a time. Every voice matters in this safe space."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="profile-posts-section">
+                        <h2 class="section-title">Your Thoughts</h2>
+                        <div id="userPostsContainer">
+                            <!-- User posts will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="privacy-note">
+                        <div class="privacy-icon">🔒</div>
+                        <div class="privacy-content">
+                            <h3>Your Privacy Matters</h3>
+                            <p>
+                                Your profile and posts remain anonymous. Only you can see this profile page.
+                                Your thoughts in the feed are shared without any connection to your identity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="about-page">
+                <div class="container">
+                    <div class="about-header">
+                        <h1>About AnonMind</h1>
+                        <p class="about-description">
+                            A safe haven for your thoughts, feelings, and experiences.
+                        </p>
+                    </div>
+
+                    <div class="mission-card">
+                        <h2 class="mission-title">Our Mission</h2>
+                        <p class="mission-text">
+                            In today's fast-paced world, finding a safe space to express yourself can be challenging. 
+                            AnonMind was created to address this need—a platform where you can share your innermost 
+                            thoughts without fear of judgment or the pressure of social expectations.
+                        </p>
+                        <p class="mission-text">
+                            We believe that everyone deserves a place to be heard, to express their feelings, and to 
+                            connect with others who understand. By removing the barriers of identity, we create an 
+                            environment where authenticity thrives and genuine human connection flourishes.
+                        </p>
+                        <p class="mission-text">
+                            Our mission is to reduce stress, encourage self-expression, and foster a supportive 
+                            community where mental wellness is prioritized. Whether you're celebrating small victories, 
+                            working through challenges, or simply need to express how you feel—this is your space.
+                        </p>
+                    </div>
+
+                    <div class="features-section">
+                        <h2 class="features-title">What We Offer</h2>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-content">
+                                    <div class="feature-icon">
+                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
+                                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="feature-text">
+                                        <h3>Complete Anonymity</h3>
+                                        <p>Your identity is protected. Share without fear of judgment or exposure.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-content">
+                                    <div class="feature-icon">
+                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="feature-text">
+                                        <h3>Mental Wellness</h3>
+                                        <p>Designed to reduce stress and promote emotional well-being through expression.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-content">
+                                    <div class="feature-icon">
+                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="9" cy="7" r="4"/>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                        </svg>
+                                    </div>
+                                    <div class="feature-text">
+                                        <h3>Supportive Community</h3>
+                                        <p>Connect with others who understand. You are never alone in your feelings.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-content">
+                                    <div class="feature-icon">
+                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="feature-text">
+                                        <h3>Self-Expression</h3>
+                                        <p>Express yourself freely without constraints. Be authentic, be you.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="values-card">
+                        <h2 class="values-title">Our Values</h2>
+                        <div class="values-grid">
+                            <div class="value-item">
+                                <div class="value-emoji">🤝</div>
+                                <h3 class="value-title">Empathy</h3>
+                                <p class="value-description">Understanding and supporting each other</p>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-emoji">🌱</div>
+                                <h3 class="value-title">Growth</h3>
+                                <p class="value-description">Encouraging personal development</p>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-emoji">🕊️</div>
+                                <h3 class="value-title">Peace</h3>
+                                <p class="value-description">Creating a calming environment</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="closing-message">
+                        "Your voice matters. Your feelings are valid. You are not alone."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>AnonMind © 2025 · Share Freely, Feel Light</p>
+            <p>A safe space for authentic self-expression</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mock feed data
+        const mockThoughts = [
+            { id: 1, thought: "Sometimes the smallest step in the right direction ends up being the biggest step of your life.", likes: 24 },
+            { id: 2, thought: "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.", likes: 42 },
+            { id: 3, thought: "Today I realized that it's okay to not have everything figured out. Progress, not perfection.", likes: 18 },
+            { id: 4, thought: "The best view comes after the hardest climb. Keep going!", likes: 31 },
+            { id: 5, thought: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.", likes: 56 },
+            { id: 6, thought: "Sometimes you need to step outside, get some air, and remind yourself of who you are and who you want to be.", likes: 38 },
+            { id: 7, thought: "It's okay to outgrow people who don't grow. You're allowed to leave tables where respect is no longer served.", likes: 47 },
+            { id: 8, thought: "Be gentle with yourself. You're doing the best you can.", likes: 29 },
+            { id: 9, thought: "The only person you should try to be better than is the person you were yesterday.", likes: 33 },
+            { id: 10, thought: "Your vibe attracts your tribe. Surround yourself with people who inspire you.", likes: 41 },
+            { id: 11, thought: "Healing is not linear. Some days will be harder than others, and that's completely okay.", likes: 52 },
+            { id: 12, thought: "You are worthy of the love you keep trying to give to everyone else.", likes: 64 }
+        ];
+
+        // State management
+        let currentPage = 'home';
+        let isDarkMode = false;
+        let userPosts = [];
+        let anonymousId = '';
+        let likedPosts = new Set();
+
+        // Generate anonymous ID
+        function generateAnonymousId() {
+            const adjectives = ['Peaceful', 'Calm', 'Serene', 'Gentle', 'Kind', 'Bright', 'Quiet', 'Thoughtful', 'Mindful', 'Dreamy'];
+            const nouns = ['Soul', 'Mind', 'Spirit', 'Heart', 'Thinker', 'Wanderer', 'Dreamer', 'Seeker', 'Voice', 'Explorer'];
+            const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            const randomNum = Math.floor(Math.random() * 999) + 1;
+            return `${randomAdj}${randomNoun}${randomNum}`;
+        }
+
+        // Initialize app
+        function init() {
+            // Load saved data
+            const savedPosts = localStorage.getItem('anonmind-user-posts');
+            if (savedPosts) {
+                userPosts = JSON.parse(savedPosts);
+            }
+
+            const savedId = localStorage.getItem('anonmind-user-id');
+            if (savedId) {
+                anonymousId = savedId;
+            } else {
+                anonymousId = generateAnonymousId();
+                localStorage.setItem('anonmind-user-id', anonymousId);
+            }
+
+            const savedLikes = localStorage.getItem('anonmind-liked-posts');
+            if (savedLikes) {
+                likedPosts = new Set(JSON.parse(savedLikes));
+            }
+
+            // Setup character counter
+            const textarea = document.getElementById('thoughtInput');
+            const charCount = document.getElementById('charCount');
+            textarea.addEventListener('input', () => {
+                charCount.textContent = `${textarea.value.length}/500 characters`;
+            });
+
+            // Render initial page
+            renderFeed();
+            updateProfile();
+        }
+
+        // Navigation
+        function navigateTo(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(page).classList.add('active');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.page === page) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            currentPage = page;
+
+            // Refresh profile when navigating to it
+            if (page === 'profile') {
+                updateProfile();
+            }
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark');
+            
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (isDarkMode) {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        // Render feed
+        function renderFeed() {
+            const feedGrid = document.getElementById('feedGrid');
+            feedGrid.innerHTML = '';
+
+            mockThoughts.forEach(item => {
+                const card = createThoughtCard(item.thought, item.id, item.likes);
+                feedGrid.appendChild(card);
+            });
+        }
+
+        // Create thought card
+        function createThoughtCard(thought, id, initialLikes) {
+            const card = document.createElement('div');
+            card.className = 'thought-card';
+            
+            const isLiked = likedPosts.has(id);
+            const likes = isLiked ? initialLikes + 1 : initialLikes;
+
+            card.innerHTML = `
+                <p class="thought-text">${thought}</p>
+                <div class="thought-footer">
+                    <span class="anonymous-label">Anonymous</span>
+                    <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${id}, this)">
+                        <svg class="heart-icon" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <span class="like-count">${likes}</span>
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Toggle like
+        function toggleLike(id, button) {
+            const likeCountSpan = button.querySelector('.like-count');
+            let currentLikes = parseInt(likeCountSpan.textContent);
+
+            if (likedPosts.has(id)) {
+                likedPosts.delete(id);
+                button.classList.remove('liked');
+                likeCountSpan.textContent = currentLikes - 1;
+            } else {
+                likedPosts.add(id);
+                button.classList.add('liked');
+                likeCountSpan.textContent = currentLikes + 1;
+            }
+
+            // Save to localStorage
+            localStorage.setItem('anonmind-liked-posts', JSON.stringify([...likedPosts]));
+        }
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const textarea = document.getElementById('thoughtInput');
+            const thought = textarea.value.trim();
+
+            if (!thought) return;
+
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+
+            submitBtn.disabled = true;
+            submitText.textContent = 'Shared!';
+
+            // Create new post
+            const newPost = {
+                id: Date.now() + '-' + Math.random(),
+                thought: thought,
+                likes: 0,
+                timestamp: new Date().toISOString()
+            };
+
+            userPosts.unshift(newPost);
+            localStorage.setItem('anonmind-user-posts', JSON.stringify(userPosts));
+
+            // Reset form after delay
+            setTimeout(() => {
+                textarea.value = '';
+                document.getElementById('charCount').textContent = '0/500 characters';
+                submitBtn.disabled = false;
+                submitText.textContent = 'Share Thought';
+                navigateTo('feed');
+            }, 2000);
+        }
+
+        // Update profile
+        function updateProfile() {
+            document.getElementById('profileName').textContent = anonymousId;
+
+            const totalPosts = userPosts.length;
+            const totalLikes = userPosts.reduce((sum, post) => sum + post.likes, 0);
+
+            document.getElementById('postCount').textContent = `${totalPosts} ${totalPosts === 1 ? 'Post' : 'Posts'}`;
+            document.getElementById('likeCount').textContent = `${totalLikes} ${totalLikes === 1 ? 'Like' : 'Likes'}`;
+
+            const container = document.getElementById('userPostsContainer');
+            container.innerHTML = '';
+
+            if (userPosts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <svg class="icon" viewBox="0 0 24 24" style="color: var(--muted-foreground);">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="empty-title">No thoughts shared yet</h3>
+                        <p class="empty-description">Start sharing your thoughts with the community</p>
+                    </div>
+                `;
+            } else {
+                const postsGrid = document.createElement('div');
+                postsGrid.className = 'thought-grid';
+
+                userPosts.forEach(post => {
+                    const postItem = document.createElement('div');
+                    postItem.className = 'post-item';
+
+                    const card = createThoughtCard(post.thought, post.id, post.likes);
+                    const date = new Date(post.timestamp);
+                    const dateStr = date.toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+
+                    postItem.appendChild(card);
+                    postItem.innerHTML += `<div class="post-date">${dateStr}</div>`;
+                    postsGrid.appendChild(postItem);
+                });
+
+                container.appendChild(postsGrid);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

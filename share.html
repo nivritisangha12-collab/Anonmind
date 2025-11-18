@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share - AnonMind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Share Page Specific Styles */
+        .share-page {
+            min-height: calc(100vh - 64px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .share-container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .share-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .share-description {
+            color: var(--muted-foreground);
+        }
+
+        .share-form {
+            margin-bottom: 2rem;
+        }
+
+        .form-card {
+            background-color: var(--card);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--foreground);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .thought-textarea {
+            width: 100%;
+            height: 200px;
+            background-color: var(--input-background);
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            transition: all 0.2s;
+        }
+
+        .thought-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(184, 161, 217, 0.1);
+        }
+
+        .thought-textarea::placeholder {
+            color: var(--muted-foreground);
+        }
+
+        .textarea-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .submit-btn-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .encouragement {
+            text-align: center;
+            color: var(--muted-foreground);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">A</div>
+                <span>AnonMind</span>
+            </a>
+            <div class="nav-items">
+                <a href="home.html" class="nav-btn">Home</a>
+                <a href="feed.html" class="nav-btn">Feed</a>
+                <a href="share.html" class="nav-btn active">Share</a>
+                <a href="profile.html" class="nav-btn">Profile</a>
+                <a href="about.html" class="nav-btn">About</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <svg class="icon sun-icon" style="display: none;" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon moon-icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="share-page">
+            <div class="share-container">
+                <div class="share-header">
+                    <h1>Share Your Thoughts</h1>
+                    <p class="share-description">
+                        Express yourself freely. Your identity remains completely anonymous.
+                    </p>
+                </div>
+                <form class="share-form" id="shareForm" onsubmit="handleSubmit(event)">
+                    <div class="form-card">
+                        <label class="form-label" for="thoughtInput">What's on your mind?</label>
+                        <textarea 
+                            id="thoughtInput" 
+                            class="thought-textarea"
+                            placeholder="Share your thoughts, feelings, or experiences..."
+                            maxlength="500"
+                            required
+                        ></textarea>
+                        <div class="textarea-info">
+                            <span id="charCount">0/500 characters</span>
+                            <span>Posted anonymously</span>
+                        </div>
+                    </div>
+                    <div class="submit-btn-container">
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 20px; height: 20px;">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                            <span id="submitText">Share Thought</span>
+                        </button>
+                    </div>
+                </form>
+                <div class="encouragement">
+                    "Every thought shared is a step towards healing."
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>AnonMind © 2025 · Share Freely, Feel Light</p>
+            <p>A safe space for authentic self-expression</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Character counter
+        const textarea = document.getElementById('thoughtInput');
+        const charCount = document.getElementById('charCount');
+
+        textarea.addEventListener('input', () => {
+            charCount.textContent = `${textarea.value.length}/500 characters`;
+        });
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const thought = textarea.value.trim();
+            if (!thought) return;
+
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitText.textContent = 'Shared!';
+
+            // Add post to user's posts
+            addUserPost(thought);
+
+            // Show success and redirect
+            setTimeout(() => {
+                window.location.href = 'feed.html';
+            }, 1500);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNavLink('share');
+        });
+    </script>
+</body>
+</html>

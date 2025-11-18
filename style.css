@@ -1,0 +1,337 @@
+/* CSS Variables for Light Mode */
+:root {
+    --background: #FBF8F3;
+    --foreground: #3D3D52;
+    --card: #FFFFFF;
+    --card-foreground: #3D3D52;
+    --primary: #B8A1D9;
+    --secondary: #A8C9E8;
+    --muted: #E8E1F5;
+    --muted-foreground: #8D8D9E;
+    --accent: #D4C6E8;
+    --border: rgba(184, 161, 217, 0.2);
+    --input-background: #FFFFFF;
+}
+
+/* Dark Mode Variables */
+.dark {
+    --background: #2A2A3E;
+    --foreground: #F5F5F7;
+    --card: #363650;
+    --card-foreground: #F5F5F7;
+    --primary: #B8A1D9;
+    --secondary: #6A8CAA;
+    --muted: #4A4A5E;
+    --muted-foreground: #B5B5C3;
+    --accent: #7E6FA3;
+    --border: rgba(184, 161, 217, 0.15);
+    --input-background: #4A4A5E;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark nav {
+    background-color: rgba(54, 54, 80, 0.8);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background: none;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-btn:hover {
+    color: var(--foreground);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+    background-color: rgba(184, 161, 217, 0.2);
+    color: var(--primary);
+}
+
+.theme-toggle {
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Main Content */
+main {
+    padding-top: 64px;
+    min-height: 100vh;
+}
+
+/* Typography */
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+}
+
+h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+}
+
+/* Card Styles */
+.card {
+    background-color: var(--card);
+    border-radius: 24px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Thought Cards */
+.thought-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.thought-card {
+    background-color: var(--card);
+    border-radius: 24px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.thought-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.thought-text {
+    color: var(--foreground);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.thought-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.anonymous-label {
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+}
+
+.like-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted-foreground);
+    transition: all 0.2s;
+    padding: 0.25rem;
+}
+
+.like-btn:hover {
+    transform: scale(1.05);
+    color: var(--primary);
+}
+
+.like-btn.liked {
+    color: var(--primary);
+}
+
+.heart-icon {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.like-btn.liked .heart-icon {
+    fill: currentColor;
+}
+
+/* Buttons */
+.cta-btn,
+.submit-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cta-btn:hover:not(:disabled),
+.submit-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.cta-btn:disabled,
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+footer p {
+    color: var(--muted-foreground);
+    margin: 0.25rem 0;
+}
+
+/* Icons */
+.icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .nav-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+}

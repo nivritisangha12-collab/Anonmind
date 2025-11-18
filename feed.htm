@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - AnonMind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Feed Page Specific Styles */
+        .feed-page {
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 64px);
+        }
+
+        .feed-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feed-description {
+            color: var(--muted-foreground);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">A</div>
+                <span>AnonMind</span>
+            </a>
+            <div class="nav-items">
+                <a href="home.html" class="nav-btn">Home</a>
+                <a href="feed.html" class="nav-btn active">Feed</a>
+                <a href="share.html" class="nav-btn">Share</a>
+                <a href="profile.html" class="nav-btn">Profile</a>
+                <a href="about.html" class="nav-btn">About</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <svg class="icon sun-icon" style="display: none;" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="icon moon-icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="feed-page">
+            <div class="container">
+                <div class="feed-header">
+                    <h1>Community Thoughts</h1>
+                    <p class="feed-description">
+                        Read what others are sharing. You're not alone in your journey.
+                    </p>
+                </div>
+                <div class="thought-grid" id="feedGrid">
+                    <!-- Thought cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>AnonMind © 2025 · Share Freely, Feel Light</p>
+            <p>A safe space for authentic self-expression</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Mock feed data
+        const mockThoughts = [
+            { id: 1, thought: "Sometimes the smallest step in the right direction ends up being the biggest step of your life.", likes: 24 },
+            { id: 2, thought: "I've learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel.", likes: 42 },
+            { id: 3, thought: "Today I realized that it's okay to not have everything figured out. Progress, not perfection.", likes: 18 },
+            { id: 4, thought: "The best view comes after the hardest climb. Keep going!", likes: 31 },
+            { id: 5, thought: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.", likes: 56 },
+            { id: 6, thought: "Sometimes you need to step outside, get some air, and remind yourself of who you are and who you want to be.", likes: 38 },
+            { id: 7, thought: "It's okay to outgrow people who don't grow. You're allowed to leave tables where respect is no longer served.", likes: 47 },
+            { id: 8, thought: "Be gentle with yourself. You're doing the best you can.", likes: 29 },
+            { id: 9, thought: "The only person you should try to be better than is the person you were yesterday.", likes: 33 },
+            { id: 10, thought: "Your vibe attracts your tribe. Surround yourself with people who inspire you.", likes: 41 },
+            { id: 11, thought: "Healing is not linear. Some days will be harder than others, and that's completely okay.", likes: 52 },
+            { id: 12, thought: "You are worthy of the love you keep trying to give to everyone else.", likes: 64 }
+        ];
+
+        // Create thought card
+        function createThoughtCard(thought, id, initialLikes) {
+            const card = document.createElement('div');
+            card.className = 'thought-card';
+            
+            const isLiked = likedPosts.has(id);
+            const likes = isLiked ? initialLikes + 1 : initialLikes;
+
+            card.innerHTML = `
+                <p class="thought-text">${thought}</p>
+                <div class="thought-footer">
+                    <span class="anonymous-label">Anonymous</span>
+                    <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${id}, this)">
+                        <svg class="heart-icon" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <span class="like-count">${likes}</span>
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Render feed
+        function renderFeed() {
+            const feedGrid = document.getElementById('feedGrid');
+            feedGrid.innerHTML = '';
+
+            mockThoughts.forEach(item => {
+                const card = createThoughtCard(item.thought, item.id, item.likes);
+                feedGrid.appendChild(card);
+            });
+        }
+
+        // Initialize feed
+        document.addEventListener('DOMContentLoaded', function() {
+            setActiveNavLink('feed');
+            renderFeed();
+        });
+    </script>
+</body>
+</html>
