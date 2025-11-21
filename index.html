@@ -4,328 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnonMind - Share Freely, Feel Light</title>
-    <link href="style.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <button class="logo" onclick="navigateTo('home')">
+    <header>
+        <nav class="nav-container">
+            <div class="logo">
                 <div class="logo-icon">A</div>
                 <span>AnonMind</span>
-            </button>
-            <div class="nav-items">
-                <button class="nav-btn" data-page="home" onclick="navigateTo('home')">Home</button>
-                <button class="nav-btn" data-page="feed" onclick="navigateTo('feed')">Feed</button>
-                <button class="nav-btn" data-page="share" onclick="navigateTo('share')">Share</button>
-                <button class="nav-btn" data-page="profile" onclick="navigateTo('profile')">Profile</button>
-                <button class="nav-btn" data-page="about" onclick="navigateTo('about')">About</button>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-                    <svg class="icon sun-icon" style="display: none;" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="5"/>
-                        <line x1="12" y1="1" x2="12" y2="3"/>
-                        <line x1="12" y1="21" x2="12" y2="23"/>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                        <line x1="1" y1="12" x2="3" y2="12"/>
-                        <line x1="21" y1="12" x2="23" y2="12"/>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                    </svg>
-                    <svg class="icon moon-icon" viewBox="0 0 24 24">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
             </div>
-        </div>
-    </nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#feed">Feed</a></li>
+                <li><a href="#share">Share</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Home Page -->
-        <div id="home" class="page active">
-            <div class="home-page">
-                <div class="hero">
-                    <div class="hero-icon">
-                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white;">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                    <h1>Share Freely, Feel Light</h1>
-                    <p class="hero-quote">"A place to be you, without your name."</p>
-                    <p class="hero-description">
-                        Express yourself freely in a safe, anonymous space. 
-                        Share your thoughts, feelings, and experiences without judgment.
-                    </p>
-                    <button class="cta-btn" onclick="navigateTo('share')">Share Your Thought</button>
-                    <div class="feature-pills">
-                        <div class="pill">✨ Anonymous</div>
-                        <div class="pill">🔒 Safe Space</div>
-                        <div class="pill">💭 No Judgment</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Home Section -->
+    <section id="home" class="section home">
+        <h1>Share Freely, Feel Light</h1>
+        <p class="quote">"A place to be you, without your name."</p>
+        <p class="description">
+            Express yourself freely in a safe, anonymous space.
+        </p>
+        <a href="#share" class="button">Share Your Thought</a>
 
-        <!-- Feed Page -->
-        <div id="feed" class="page">
-            <div class="feed-page">
-                <div class="container">
-                    <div class="feed-header">
-                        <h1>Community Thoughts</h1>
-                        <p class="feed-description">
-                            Read what others are sharing. You're not alone in your journey.
-                        </p>
-                    </div>
-                    <div class="thought-grid" id="feedGrid">
-                        <!-- Thought cards will be inserted here by JavaScript -->
-                    </div>
-                </div>
-            </div>
+        <div class="features">
+            <span class="pill">✨ Anonymous</span>
+            <span class="pill">🔒 Safe Space</span>
+            <span class="pill">💭 No Judgment</span>
+        </div>
+    </section>
+
+    <!-- Feed Section -->
+    <section id="feed" class="section feed">
+        <h1>Community Thoughts</h1>
+        <p class="description">
+            Read what others are sharing. You’re not alone.
+        </p>
+
+        <div class="simple-grid">
+            <div class="card">“Life feels heavy sometimes.”</div>
+            <div class="card">“I wish I could express my feelings openly.”</div>
+            <div class="card">“Today was a little better than yesterday.”</div>
+        </div>
+    </section>
+
+    <!-- Share Section -->
+    <section id="share" class="section share">
+        <h1>Share Your Thoughts</h1>
+        <p>Your identity remains anonymous.</p>
+
+        <textarea placeholder="Write your thoughts..."></textarea>
+
+        <button class="button">Post Anonymously</button>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="section profile">
+        <h1>Your Profile</h1>
+        <p>Anonymous User</p>
+
+        <div class="simple-grid">
+            <div class="card">Your Post #1</div>
+            <div class="card">Your Post #2</div>
         </div>
 
-        <!-- Share Page -->
-        <div id="share" class="page">
-            <div class="share-page">
-                <div class="share-container">
-                    <div class="share-header">
-                        <h1>Share Your Thoughts</h1>
-                        <p class="share-description">
-                            Express yourself freely. Your identity remains completely anonymous.
-                        </p>
-                    </div>
-                    <form class="share-form" onsubmit="handleSubmit(event)">
-                        <div class="form-card">
-                            <label class="form-label" for="thoughtInput">What's on your mind?</label>
-                            <textarea 
-                                id="thoughtInput" 
-                                class="thought-textarea"
-                                placeholder="Share your thoughts, feelings, or experiences..."
-                                maxlength="500"
-                            ></textarea>
-                            <div class="textarea-info">
-                                <span id="charCount">0/500 characters</span>
-                                <span>Posted anonymously</span>
-                            </div>
-                        </div>
-                        <div class="submit-btn-container">
-                            <button type="submit" class="submit-btn" id="submitBtn">
-                                <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 20px; height: 20px;">
-                                    <line x1="22" y1="2" x2="11" y2="13"/>
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                                </svg>
-                                <span id="submitText">Share Thought</span>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="encouragement">
-                        "Every thought shared is a step towards healing."
-                    </div>
-                </div>
+        <p class="note">🔒 Only you can see this profile.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <h1>About AnonMind</h1>
+        <p>
+            A safe haven for your thoughts, feelings, and experiences.
+        </p>
+
+        <div class="simple-grid">
+            <div class="card">
+                <h3>Complete Anonymity</h3>
+                <p>Share without fear.</p>
+            </div>
+            <div class="card">
+                <h3>Mental Wellness</h3>
+                <p>Express and heal.</p>
+            </div>
+            <div class="card">
+                <h3>Supportive Community</h3>
+                <p>You are not alone.</p>
             </div>
         </div>
 
-        <!-- Profile Page -->
-        <div id="profile" class="page">
-            <div class="profile-page">
-                <div class="container">
-                    <div class="profile-header">
-                        <div class="profile-info">
-                            <div class="profile-avatar">
-                                <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 48px; height: 48px;">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="12" cy="7" r="4"/>
-                                </svg>
-                            </div>
-                            <div class="profile-details">
-                                <h2 class="profile-name" id="profileName">Anonymous User</h2>
-                                <p class="profile-subtitle">Anonymous Mind Sharer</p>
-                                <div class="profile-stats">
-                                    <div class="stat-item">
-                                        <svg class="stat-icon" viewBox="0 0 24 24">
-                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="none" stroke="currentColor" stroke-width="2"/>
-                                        </svg>
-                                        <span id="postCount">0 Posts</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <svg class="stat-icon" viewBox="0 0 24 24">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="none" stroke="currentColor" stroke-width="2"/>
-                                        </svg>
-                                        <span id="likeCount">0 Likes</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <svg class="stat-icon" viewBox="0 0 24 24">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
-                                            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
-                                            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
-                                            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
-                                        </svg>
-                                        <span>Since November 2025</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile-bio">
-                            <svg class="stat-icon" viewBox="0 0 24 24" style="margin-top: 4px;">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                            <p class="bio-text">
-                                "Sharing thoughts freely, one post at a time. Every voice matters in this safe space."
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="profile-posts-section">
-                        <h2 class="section-title">Your Thoughts</h2>
-                        <div id="userPostsContainer">
-                            <!-- User posts will be inserted here -->
-                        </div>
-                    </div>
-
-                    <div class="privacy-note">
-                        <div class="privacy-icon">🔒</div>
-                        <div class="privacy-content">
-                            <h3>Your Privacy Matters</h3>
-                            <p>
-                                Your profile and posts remain anonymous. Only you can see this profile page.
-                                Your thoughts in the feed are shared without any connection to your identity.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- About Page -->
-        <div id="about" class="page">
-            <div class="about-page">
-                <div class="container">
-                    <div class="about-header">
-                        <h1>About AnonMind</h1>
-                        <p class="about-description">
-                            A safe haven for your thoughts, feelings, and experiences.
-                        </p>
-                    </div>
-
-                    <div class="mission-card">
-                        <h2 class="mission-title">Our Mission</h2>
-                        <p class="mission-text">
-                            In today's fast-paced world, finding a safe space to express yourself can be challenging. 
-                            AnonMind was created to address this need—a platform where you can share your innermost 
-                            thoughts without fear of judgment or the pressure of social expectations.
-                        </p>
-                        <p class="mission-text">
-                            We believe that everyone deserves a place to be heard, to express their feelings, and to 
-                            connect with others who understand. By removing the barriers of identity, we create an 
-                            environment where authenticity thrives and genuine human connection flourishes.
-                        </p>
-                        <p class="mission-text">
-                            Our mission is to reduce stress, encourage self-expression, and foster a supportive 
-                            community where mental wellness is prioritized. Whether you're celebrating small victories, 
-                            working through challenges, or simply need to express how you feel—this is your space.
-                        </p>
-                    </div>
-
-                    <div class="features-section">
-                        <h2 class="features-title">What We Offer</h2>
-                        <div class="features-grid">
-                            <div class="feature-card">
-                                <div class="feature-content">
-                                    <div class="feature-icon">
-                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
-                                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                                        </svg>
-                                    </div>
-                                    <div class="feature-text">
-                                        <h3>Complete Anonymity</h3>
-                                        <p>Your identity is protected. Share without fear of judgment or exposure.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="feature-card">
-                                <div class="feature-content">
-                                    <div class="feature-icon">
-                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="feature-text">
-                                        <h3>Mental Wellness</h3>
-                                        <p>Designed to reduce stress and promote emotional well-being through expression.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="feature-card">
-                                <div class="feature-content">
-                                    <div class="feature-icon">
-                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
-                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                            <circle cx="9" cy="7" r="4"/>
-                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                                        </svg>
-                                    </div>
-                                    <div class="feature-text">
-                                        <h3>Supportive Community</h3>
-                                        <p>Connect with others who understand. You are never alone in your feelings.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="feature-card">
-                                <div class="feature-content">
-                                    <div class="feature-icon">
-                                        <svg class="icon" viewBox="0 0 24 24" style="stroke: white; width: 24px; height: 24px;">
-                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="feature-text">
-                                        <h3>Self-Expression</h3>
-                                        <p>Express yourself freely without constraints. Be authentic, be you.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="values-card">
-                        <h2 class="values-title">Our Values</h2>
-                        <div class="values-grid">
-                            <div class="value-item">
-                                <div class="value-emoji">🤝</div>
-                                <h3 class="value-title">Empathy</h3>
-                                <p class="value-description">Understanding and supporting each other</p>
-                            </div>
-                            <div class="value-item">
-                                <div class="value-emoji">🌱</div>
-                                <h3 class="value-title">Growth</h3>
-                                <p class="value-description">Encouraging personal development</p>
-                            </div>
-                            <div class="value-item">
-                                <div class="value-emoji">🕊️</div>
-                                <h3 class="value-title">Peace</h3>
-                                <p class="value-description">Creating a calming environment</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="closing-message">
-                        "Your voice matters. Your feelings are valid. You are not alone."
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+        <p class="closing">"Your voice matters."</p>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>AnonMind © 2025 · Share Freely, Feel Light</p>
-            <p>A safe space for authentic self-expression</p>
-        </div>
+        <p>AnonMind © 2025 · Share Freely, Feel Light</p>
     </footer>
 
-    
 </body>
 </html>
