@@ -1,39 +1,28 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   const postBtn = document.getElementById('postBtn');
-  const postText = document.getElementById('postText');
-  
+  const postText = document.getElementById('postText'); 
   if (postBtn && postText) {
     postBtn.addEventListener('click', function() {
-      const text = postText.value.trim();
-      
+      const text = postText.value.trim(); 
       if (text !== '') {
-    
         let posts = JSON.parse(localStorage.getItem('posts') || '[]');
-        
-
         const newPost = {
           content: text,
           time: new Date().toLocaleString()
         };
         posts.unshift(newPost);
         localStorage.setItem('posts', JSON.stringify(posts));
-        
-
         postText.value = '';
         alert('Your anonymous post has been shared!');
       }
     });
   }
 });
-
-
 document.addEventListener('DOMContentLoaded', function() {
   const feedContainer = document.getElementById('feed');
-  
   if (feedContainer) {
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-    
     if (posts.length === 0) {
       feedContainer.innerHTML = '<div class="post"><p>No posts yet. Be the first to share your thought!</p></div>';
     } else {
