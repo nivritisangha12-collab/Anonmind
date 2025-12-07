@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Reflectify</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><a href="index.html">Reflectify</a></div>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="feed.html">Feed</a>
+      <a href="share.html">Share</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <section class="container profile-box">
+    <div class="profile-header">
+      <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Profile Picture">
+      <div class="profile-info">
+        <h2 id="username">AnonymousUser</h2>
+        <p style="opacity: 0.8; margin: 5px 0 15px 0;">Sharing thoughts anonymously ✨</p>
+        <button id="followBtn" class="btn-small">Follow</button>
+        <div class="stats">
+          <div><strong id="postsCount">0</strong> Posts</div>
+          <div><strong id="followersCount">127</strong> Followers</div>
+          <div><strong id="followingCount">89</strong> Following</div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-posts" id="profilePosts">
+    </div>
+  </section>
+
+</body>
+</html>
