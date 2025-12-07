@@ -1,4 +1,4 @@
-// Function 1: Handle Post Submission and Store
+
 document.addEventListener('DOMContentLoaded', function() {
   const postBtn = document.getElementById('postBtn');
   const postText = document.getElementById('postText');
@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const text = postText.value.trim();
       
       if (text !== '') {
-        // Get existing posts from localStorage
+    
         let posts = JSON.parse(localStorage.getItem('posts') || '[]');
         
-        // Add new post
+
         const newPost = {
           content: text,
           time: new Date().toLocaleString()
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         posts.unshift(newPost);
         localStorage.setItem('posts', JSON.stringify(posts));
         
-        // Clear textarea
+
         postText.value = '';
         alert('Your anonymous post has been shared!');
       }
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Function 2: Display Posts in Feed
+
 document.addEventListener('DOMContentLoaded', function() {
   const feedContainer = document.getElementById('feed');
   
@@ -50,13 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Function 3: Display Posts in Profile and Update Stats
+
 document.addEventListener('DOMContentLoaded', function() {
   const profilePosts = document.getElementById('profilePosts');
   const postsCount = document.getElementById('postsCount');
   const followBtn = document.getElementById('followBtn');
   
-  // Update posts count and display posts
+
   if (profilePosts && postsCount) {
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
     postsCount.textContent = posts.length;
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Toggle follow button
+
   if (followBtn) {
     followBtn.addEventListener('click', function() {
       if (followBtn.textContent === 'Follow') {
