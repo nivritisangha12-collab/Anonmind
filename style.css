@@ -19,7 +19,7 @@ a {
   transition: all 0.3s ease;
 }
 
-/* Navigation */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -57,7 +57,7 @@ a {
   transform: translateY(-2px);
 }
 
-/* Hero Section */
+
 .hero {
   margin-top: 80px;
   padding: 40px 20px;
@@ -175,7 +175,7 @@ a {
   text-align: center;
 }
 
-/* Feed Posts */
+
 .feed-container {
   margin-top: 40px;
 }
@@ -234,7 +234,7 @@ a {
   margin-left: auto;
 }
 
-/* Share Page */
+
 .share-box {
   max-width: 600px;
   margin: 60px auto;
@@ -276,7 +276,7 @@ textarea:focus {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Profile Page */
+
 .profile-box {
   display: flex;
   flex-direction: column;
@@ -393,7 +393,7 @@ textarea:focus {
   word-wrap: break-word;
 }
 
-/* About Page */
+
 .about-section {
   margin-top: 60px;
   max-width: 900px;
@@ -451,7 +451,6 @@ textarea:focus {
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
-/* Simple Fade Animation */
 .fade {
   opacity: 0;
   animation: fadeIn 1s ease forwards;
@@ -468,7 +467,7 @@ textarea:focus {
   }
 }
 
-/* Success Message */
+
 .success-message {
   background: rgba(76, 175, 80, 0.9);
   color: white;
@@ -494,7 +493,7 @@ textarea:focus {
   }
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .navbar {
     padding: 15px 20px;
